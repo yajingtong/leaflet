@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	
+	    <meta charset="utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+     	<title>Leeds Hygiene map</title>
+       
+		<!-- a link to the Leaflet stylesheet-->
+	    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+        
+		<!--a link to own stylesheet-->
+	    <link rel ="stylesheet"href="style.css" type= "text/css" >
+		
+	    <!--a linck to leaflet-search css-->
+	    <link type="text/css" href="leaflet-search.css"></link>
+		
+		<!--This is a link to the googlefont stylesheet-->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" >
+		
+		<!-- a link to the Leaflet JS library-->
+	    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+   	   
+	   <!--jquery link-->
+	    <SCRIPT language="JavaScript" type="text/JavaScript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></SCRIPT>
+	
+        <!--layercontrol-->
+	    <script type="text/javascript" src="layercontrol.js" ></script>
+        
+		<!--a linck to leaflet-search library-->
+	    <script type="text/javascript" src="leaflet-search.js"></script>
+       
+	    <!-- a link to jquery library-->
+  	    <script type="text/JavaScript" src="jquery-3.5.1.js"></script>
+	    
+		<!-- -a link to leflet search require-->
+        <script src="https://unpkg.com/requirejs@2.2.0/require.js"></script>
+ 
+	    <!--Defines link to Zoombar CSS file: taken from https://github.com/elrobis/L.Control.ZoomBar-->
+  	    <link rel="stylesheet" type="text/css" href="https://elrobis.github.io/L.Control.ZoomBar/src/L.Control.ZoomBar.css" />
+		
+		<!--Defines link to Zoombar Javascript file: taken from https://github.com/elrobis/L.Control.ZoomBar-->
+		 <script type="text/javascript" src="https://elrobis.github.io/L.Control.ZoomBar/src/L.Control.ZoomBar.js"></script>
+		
+        <!--defines link to leaflet search Javascript file taken from https://github.com/stefanocudini/leaflet-search-->
+	    <script type="https://github.com/stefanocudini/leaflet-search/blob/master/src/leaflet-search.js"></script>
+       
+    </head>
+    
+	<body>
+	     <!--Add the map header that appears on the banner at the top of the web page-->
+	     <div class= "mapheader"> 
+         <h1> Leeds Hygiene map<img src="Leeds-City-Council-Logo.jpg" align="right"
+				style="width:200px;height:90px;"></h1> 
+         </div>
+
+        <!--Add the navigation bar to the page, set the 'Home' tab as active-->
+        <ul class="headbar">
+            <li> <a href="LeedsHygieneMap.html" class="active">Home</a> </li>
+            <li> <a href="https://www.leeds.gov.uk/business/environmental-health-for-business/food/food-hygiene-rating">Food hygiene rating scheme</a><li>
+            <li> <a href = "https://www.scoresonthedoors.org.uk/council/leeds-city-council">Rating from Leeds City Council</a><li>
+            <li> <a href="https://www.leeds.gov.uk/business/environmental-health-for-business/food/food-inspections"> learn more about Food hygiene inspections</a><li>
+        </ul>
+		
+       
+
+		
+        <!--This div contains Layout of form boxes -->
+        <div class = "wrapper">
+      
+		    <form id = 'insertData' method = 'POST' action = 'fetchData.php' enctype="multipart/form-data">
+			    <p>Please use your database log-in credentials to use this function:</p>
+			    <p>Username : <input type = 'text' class = 'boxes' name = 'user'></p>
+			    <p>Password : <input type = 'text' class = 'boxes' name = 'password'></p>
+			    <p>Business Type : <select name="businesstype" class='boxes'></p>
+				<!-- Create dropdown list of business types -->
+				   <option value="Distributors/Transporters" selected>Distributors/Transporters</option> <!-- selected sets as default -->
+				   <option value="Restaurant/Cafe/Canteen">Restaurant/Cafe/Canteen</option>
+				   <option value="Hotel/bed & breakfast/guest house">Hotel/bed & breakfast/guest house</option>
+				   <option value="Manufacturers/packers">Manufacturers/packers</option>
+				   <option value="Pub/bar/nightclub">Pub/bar/nightclub</option>
+				   <option value="School/college/university">School/college/university</option>
+				   <option value="Takeaway/sandwich shop">Takeaway/sandwich shop</option>
+				   <option value="Retailers - supermarkets/hypermarkets">Retailers-supermarkets/hypermarkets</option>
+			       <option value="Farmers/growers">Farmers/growers</option>
+				   <option value="Hospitals/Childcare/Caring Premises">Hospitals/Childcare/Caring Premises</option>
+                   <option value="Hotel/bed & breakfast/guest house" > Hotel/bed & breakfast/guest house</option>
+                   <option value="Mobile caterer">Mobile caterer</option>
+                   <option value="Other catering premises''Retailers - other">Other catering premises''Retailers - other</option>
+				   </select>
+				<p>hygiene rate : <select name="hygiene" class='boxes'></p>
+				<!-- Create dropdown list of hygine markes -->
+				   <option value="NULL">null</option>
+				   <option value="0">0</option>
+				   <option value="5">5</option>
+				   <option value="10">10</option>
+				   <option value="15"selected>15</option>
+				   <option value="20">20</option>    <!-- selected sets as default -->
+				 </select>
+		
+			<p>Latitude (e.g. 10.0) : <input type = 'text' class = 'boxes' name = 'lat'></p>
+			<p>Longitude (e.g. 10.0) : <input type = 'text' class = 'boxes' name = 'lon'></p>
+			<p>Day (1-31) : <input type = 'text' class = 'boxes' name = 'day'></p>
+			<p>Hour (1-23) : <input type = 'text' class = 'boxes' name = 'hour'></p>
+			<p>Minute (1-59) : <input type = 'text' class = 'boxes' name = 'min'></p>
+		
+			<input type='submit' id ='submit' name = 'Submit' value= 'Submit Form'>
+		</form>
+	</div>
+
+
+
+     <div><svg height="120" width="200"></svg></div>
+
+     <!--Call the function to load data from server-->
+     <body onload = "fetchData()">
+      <!--The map will appear in this div-->
+           <div id="rightpane">
+           <div id="leafletmap"class="mapwindow" style="width: 1200px; height: 600px;"></div>
+           <!-- a link to owm javascript map setup-->
+	       <script type="text/javascript" src="mapsetup.js"></script>
+           <div>      
+
+     </body>
+     <!--Legend will appear in this part -->
+        <div class="legend">
+        <svg height="120" width="200">
+
+			<h2 style="color:#0a0a0a; text-align:center">Type of business</h2>
+			<h3><b>legend:</b></h3>
+
+			<p><img src="restauranticon.png" width=25 alt="restauranticon"> Restaurant/Cafe/Canteen
+			   <img src="transporticon.png" width=25 alt=" transporticon">  Distributors/Transporters
+			   <img src="schoolmarker.png" width=25 alt="schoolmarker"> School/college/university </p>
+
+			<p><img src="Retail-Icon.png" width=25 alt="RetailIcon"> Retailers - other;
+			   <img src="supermarket.png" width=25 alt="supermarketicon">Retailers-supermarkets/hypermarkets
+			   <img src="hospitalicon.png" width=25 alt=" HospitalIcon"> Hospitals/Childcare/Caring Premises
+			   <img src="farmicon.png" width=25 alt=" FarmIcon"> farmers /growers
+			</p> 
+                <img src="pubicon.png" width=25 alt="PubIcon"> Pub/bar/nightclub
+				<img src="marker-icon-yellow.png" width=15 alt="Yellow Icon"> Other catering premises
+			    <img src="sandwichicon.svg" width=25 alt="TakeawayIcon">Takeaway/sandwich shop
+
+			<p><img src="marker-icon-grey.png" width=15 alt="grey icon "> Mobile caterer
+			   <img src="manufactureicon.png" width=25 alt="manufactureicon">Manufacturers/packers
+               <img src="hotelicon.png"width=25 alt="hotelicon">Hotel/bed & breakfast/guest house</p> 
+        </svg> 
+        </div>
+
+         <!--buttons will appear in This div  -->
+         <div id="button">
+                <button id ="button1" class = "layerbutton" onclick="clearData()"> clear data </button>
+                <button id ="layerbutton2" class = "layerbutton" onclick="fetchData()"> show map </button>
+                <button id ="layerbutton3" class="layerbutton"> turn map on/off </button>
+         </div>
+	
+
+
+     </body>
+
+        <!--Add a website footer with contact details-->
+         <div class="footer">
+	         <h5>Tel:  0113 247 6286 |Email:food.safety@leeds.gov.uk|Website:http://www.leeds.gov.uk/ | Address:Civic Hall Calverley Street,Leeds,West Yorkshire,LS1 1UR</h5>
+	         <h6> © Claire Tong, University of Leeds, 2020 </h6>
+	         <img src="Leeds-City-Council-Logo.jpg" align="center" style="width:230px;height:100px;"></h1> 
+         </div>
+</html>

@@ -1,0 +1,139 @@
+html,body,map{
+	width:100%;
+	height:100%;/*This enables % values to be applied to other objects*/
+}
+
+html {
+	height:100%;/*This enables % values to be applied to other objects*/
+	width :100%;
+	margin:0;
+	font-family :font-family: 'Open Sans', sans-serif;
+	background-color:grey
+	font-size :20px
+}
+body{
+	background-color: #def;
+   color: black;
+   font-size: small;
+   font-family: Arial,Helvetica,san-serif;
+   text-align:left;
+	
+}
+.title{
+	font-family :font-family: 'Open Sans', sans-serif;
+	text-align:center;
+}
+/* headbar include links */
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color:pink; 
+  position: -webkit-sticky; 
+  position: sticky;
+  top: 0;
+  top: 0;
+}
+
+
+li a {
+  color: #lightblue;
+}
+	
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-family:'DM Mono', monospace;
+}
+
+li a:hover {
+  background-color:#666;
+}
+.active {
+  background-color: #palegoldenrod;
+}
+li {
+  border-right: 1px solid #bbb;
+}
+
+li:last-child {
+  border-right: none;
+}
+}
+/* Website header, including logo */
+
+.mapheader {
+  background-color: #F1F1F1;
+  text-align: center;
+  background-image: url("Leeds-City-Council-Logo.jpg");
+  width:100%;
+  padding: 20px;
+  z-index:10;
+  background-repeat: no-repeat;
+  background-size: cover;
+};
+
+
+
+
+
+.boxes	{
+   position: absolute; 
+   left : 150px;
+   border: thin solid black; 
+   float: right;
+   font-size:20px;
+}
+
+/* set the map in center of webpage*/
+#leafletmap{z-index:5;
+    padding:10px;
+    margin-left: auto;
+	margin-right: auto
+	
+}
+/* Set the font size for the heading */
+
+h1{
+	font-family :font-family: :'DM Mono', monospace;
+    float:center;
+    font-size:50px;
+	
+}
+.layerbutton{
+	padding :5px;
+	font-size:22;
+	cursor:pointer;
+	margin:5px;
+}
+/*set the position and background of searchbox */
+.wrapper{
+	font-family:'DM Mono', monospace;
+	font-size:20px;
+	background-color: #F1F1F1;
+    text-align: center;
+    background-image: url("food.jpg");
+    font-size: 20px;
+    width:100%;
+    padding: 20px;
+    z-index:10;
+	background-repeat:no-repeat;
+	
+}
+/*set the map window in center*/
+.mapwindow {
+   height: 100%;
+   width: 100%;
+   margin: 0px;
+   padding-bottom: 0px;
+   float: center;
+}
